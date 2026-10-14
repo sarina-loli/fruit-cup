@@ -1,0 +1,107 @@
+.about {
+  width: 100%;
+  max-width: 90rem;
+  margin: 0 auto;
+  padding: calc(var(--nav-h) + clamp(2rem, 7vw, 5rem)) var(--gutter) clamp(3rem, 8vw, 6rem);
+}
+
+.about--state {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.25rem;
+  min-height: 70vh;
+  color: var(--linen-dim);
+}
+
+.about--state h1 {
+  color: var(--linen);
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-weight: 300;
+}
+
+.about__title {
+  max-width: 11em;
+  font-family: var(--font-display);
+  font-size: clamp(2.6rem, 7vw, 6rem);
+  font-weight: 300;
+  font-variation-settings: "SOFT" 60;
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+}
+
+.about__lead {
+  max-width: 36rem;
+  margin-top: clamp(1.5rem, 3vw, 2.25rem);
+  color: var(--linen-dim);
+  font-size: clamp(1.15rem, 2vw, 1.4rem);
+  line-height: 1.55;
+}
+
+/* Two real frames from the sequence, cropped to portrait and staggered. */
+.about__figures {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(1rem, 3vw, 2.5rem);
+  align-items: start;
+  margin-top: clamp(3rem, 8vw, 6rem);
+}
+
+.about__figure img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border-radius: 1.25rem;
+  background: var(--ink);
+}
+
+.about__figure figcaption {
+  margin-top: 0.75rem;
+  color: var(--linen-dim);
+  font-size: 0.9rem;
+}
+
+.about__figure--second {
+  margin-top: clamp(2rem, 9vw, 7rem);
+}
+
+.about__sections {
+  display: grid;
+  gap: clamp(2.5rem, 6vw, 4.5rem);
+  margin-top: clamp(4rem, 10vw, 8rem);
+}
+
+.about__section {
+  display: grid;
+  gap: 1rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--linen-faint);
+}
+
+.about__section h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 2.6vw, 1.9rem);
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+.about__section p {
+  max-width: 38rem;
+  color: var(--linen-dim);
+  font-size: 1.1rem;
+  line-height: 1.7;
+}
+
+.about__cta {
+  margin-top: clamp(3rem, 7vw, 5rem);
+}
+
+@media (min-width: 840px) {
+  .about__section {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+    gap: 3rem;
+  }
+}

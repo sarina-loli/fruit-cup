@@ -1,0 +1,202 @@
+/* The container is tall; the stage inside it is pinned with position: sticky.
+   Pinned scroll distance = container height - stage height = --pin (350vh). */
+.sequence {
+  position: relative;
+  height: calc(100vh + var(--pin));
+  height: calc(100svh + var(--pin));
+}
+
+.sequence__stage {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  height: 100svh;
+  overflow: hidden;
+  background: var(--ink);
+}
+
+.sequence__canvas {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* ---- Loading progress ---- */
+.sequence__progress {
+  position: absolute;
+  right: var(--gutter);
+  bottom: 0.9rem;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: min(14rem, 45vw);
+  color: var(--linen-dim);
+  font-size: 0.8rem;
+  font-variant-numeric: tabular-nums;
+  transition: opacity 0.6s var(--ease), visibility 0s linear 0s;
+}
+
+.sequence__progress[data-state="ready"],
+.sequence__progress[data-state="error"] {
+  opacity: 0;
+  visibility: hidden;
+  transition-delay: 0s, 0.6s;
+}
+
+.sequence__percent {
+  min-width: 2.6em;
+  text-align: right;
+}
+
+.sequence__track {
+  flex: 1;
+  height: 2px;
+  overflow: hidden;
+  background: var(--linen-faint);
+}
+
+.sequence__bar {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: var(--mandarin);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.25s var(--ease);
+}
+
+.sequence__error {
+  position: absolute;
+  left: 50%;
+  bottom: 18%;
+  z-index: 3;
+  width: min(26rem, calc(100% - 2 * var(--gutter)));
+  transform: translateX(-50%);
+  color: var(--linen-dim);
+  text-align: center;
+}
+
+/* ---- Hero copy overlay ---- */
+.hero-copy {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.5rem;
+  padding: var(--nav-h) var(--gutter) 3rem;
+  pointer-events: none;
+  text-shadow: 0 0 28px rgba(1, 1, 1, 0.85);
+}
+
+.hero-copy__part {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.5rem;
+  transition: opacity 0.6s var(--ease), transform 0.6s var(--ease), visibility 0s linear 0s;
+}
+
+.hero-copy__heading {
+  max-width: 7.5em;
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 4.6vw, 4.5rem);
+  font-weight: 300;
+  font-variation-settings: "SOFT" 60;
+  line-height: 1.04;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+}
+
+.hero-copy__description {
+  max-width: 21rem;
+  color: var(--linen-dim);
+  font-size: 1.05rem;
+}
+
+.hero-copy__hint {
+  margin-top: 1rem;
+  color: var(--linen-dim);
+  font-size: 0.9rem;
+}
+
+/* Once the user starts scrolling, the intro copy steps aside. */
+.sequence__stage:not([data-phase="intro"]) .hero-copy__part {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-0.75rem);
+  transition: opacity 0.45s var(--ease), transform 0.45s var(--ease), visibility 0s linear 0.45s;
+}
+
+.hero-copy__outro {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 1.25rem;
+  padding: var(--nav-h) var(--gutter) 3rem;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(0.75rem);
+  transition: opacity 0.45s var(--ease), transform 0.45s var(--ease), visibility 0s linear 0.45s;
+}
+
+.sequence__stage[data-phase="outro"] .hero-copy__outro {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  transition-delay: 0.15s, 0.15s, 0s;
+}
+
+.hero-copy__closing {
+  max-width: 14em;
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 2.6vw, 2.1rem);
+  font-weight: 300;
+  line-height: 1.2;
+}
+
+/* Tablets and phones: heading above the image, text and button below it, so
+   the copy never sits on top of the cup. */
+@media (max-width: 900px), (orientation: portrait) {
+  .hero-copy {
+    justify-content: space-between;
+    gap: 1rem;
+    padding: calc(var(--nav-h) + 0.75rem) var(--gutter) calc(2.75rem + env(safe-area-inset-bottom, 0px));
+  }
+
+  .hero-copy__heading {
+    max-width: 9em;
+    font-size: clamp(2.25rem, 9.5vw, 4.25rem);
+  }
+
+  .hero-copy__bottom {
+    gap: 1.25rem;
+  }
+
+  .hero-copy__description {
+    max-width: 30rem;
+  }
+
+  .hero-copy__hint {
+    display: none;
+  }
+
+  .hero-copy__outro {
+    align-items: center;
+    justify-content: flex-end;
+    padding-bottom: calc(2.75rem + env(safe-area-inset-bottom, 0px));
+    text-align: center;
+  }
+
+  .sequence__progress {
+    bottom: calc(0.9rem + env(safe-area-inset-bottom, 0px));
+  }
+}
