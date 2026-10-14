@@ -23,13 +23,13 @@ export const SEQUENCE = {
 };
 
 export const frameUrl = (index) => {
-  if (window.innerWidth > 1800) {
+  if (window.innerWidth >= 1000) {
     return `${import.meta.env.BASE_URL}frames/frame-${String(index + 1).padStart(4, "0")}.jpg`;
   }
   if (window.innerWidth < 1000) {
-    return `${import.meta.env.BASE_URL}framess/frame-${String(index + 1).padStart(4, "0")}.jpg`;
+    return `${import.meta.env.BASE_URL}framess/frame-${String(index + 1).padStart(4, "0")}.png`;
   }
-  return `${import.meta.env.BASE_URL}frames/frame-${String(index + 1).padStart(4, "0")}.jpg`;
+  
 };
 
 export const FRAME_ASPECT = SEQUENCE.nativeWidth / SEQUENCE.nativeHeight;
