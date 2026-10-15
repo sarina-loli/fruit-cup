@@ -62,8 +62,11 @@ export default function createSequenceRenderer({ container, stage, canvas, store
     // Contain-fit: the whole frame is always visible, never cropped or stretched.
     const cw = canvas.width;
     const ch = canvas.height;
-    const w = Math.min(cw, ch * FRAME_ASPECT);
-    const h = w / FRAME_ASPECT;
+    // Use the frame's own aspect so portrait (mobile) frames are not squashed to 16:9.
+    const ref = frames[lower >= 0 ? lower : upper];
+    const aspect = ref.width && ref.height ? ref.width / ref.height : FRAME_ASPECT;
+    const w = Math.min(cw, ch * aspect);
+    const h = w / aspect;
     const x = Math.round((cw - w) / 2);
     const y = Math.round((ch - h) / 2);
 
