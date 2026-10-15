@@ -5,7 +5,7 @@ export default function Navbar() {
     <header className="navbar">
       <div className="navbar__inner">
         <Link to="/" className="navbar__brand">
-          Fruit Cup
+          Fruit Cup {window.innerWidth}
         </Link>
         <nav aria-label="Primary">
           <ul className="navbar__links">
